@@ -1,0 +1,82 @@
+# Chrome Extension - Etimad Tool .gitignore
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (if using build tools in future)
+node_modules/
+bower_components/
+
+# Build outputs (if adding TypeScript/build process later)
+dist/
+build/
+*.js.map
+*.ts.map
+
+# Extension packaging
+*.crx
+*.pem
+*.zip
+
+# Temporary files
+.tmp/
+temp/
+tmp/
+
+# Environment files (if adding later)
+.env
+.env.local
+.env.*.local
+
+# User-specific settings (not the template)
+# Uncomment if you want to ignore user settings
+# manifest.json (if it contains user-specific client ID)
+
+# Test files output
+test-results/
+coverage/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# IDE
+.project
+.classpath
+.settings/
+.metadata/
+
+# Archive files
+*.tar
+*.tar.gz
+*.rar
+*.7z

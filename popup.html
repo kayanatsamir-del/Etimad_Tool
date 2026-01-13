@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مستخرج بيانات اعتماد | Etimad Extractor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📊 مستخرج بيانات اعتماد</h1>
+      <p class="subtitle">Etimad Tender Data Extractor</p>
+    </header>
+
+    <main>
+      <!-- Status Section -->
+      <div id="statusSection" class="section">
+        <div class="status-indicator">
+          <span id="statusIcon">⏳</span>
+          <span id="statusText">جاري فحص الصفحة...</span>
+        </div>
+      </div>
+
+      <!-- Configuration Section -->
+      <div id="configSection" class="section">
+        <h3>⚙️ الإعدادات | Settings</h3>
+
+        <div class="form-group">
+          <label for="spreadsheetId">
+            معرّف جدول البيانات (Spreadsheet ID):
+            <a href="#" id="helpLink" title="كيفية الحصول على معرّف الجدول">❓</a>
+          </label>
+          <input
+            type="text"
+            id="spreadsheetId"
+            placeholder="1a2b3c4d5e6f7g8h9i0j..."
+            dir="ltr"
+          />
+          <small>يمكنك نسخه من رابط جدول بيانات قوقل</small>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="autoExport" />
+            تصدير تلقائي عند فتح الصفحة (Auto Export)
+          </label>
+        </div>
+
+        <div class="form-group">
+          <button id="saveConfigBtn" class="btn btn-secondary">
+            💾 حفظ الإعدادات | Save Settings
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Section -->
+      <div id="progressSection" class="section" style="display: none;">
+        <h3>📈 التقدم | Progress</h3>
+
+        <div class="progress-steps">
+          <div class="step" data-step="1">
+            <span class="step-icon">1</span>
+            <span class="step-text">فحص الصفحة</span>
+            <span class="step-status">⏳</span>
+          </div>
+
+          <div class="step" data-step="2">
+            <span class="step-icon">2</span>
+            <span class="step-text">استخراج البيانات الأساسية</span>
+            <span class="step-status">⏳</span>
+          </div>
+
+          <div class="step" data-step="3">
+            <span class="step-icon">3</span>
+            <span class="step-text">استخراج التواريخ والتصنيف</span>
+            <span class="step-status">⏳</span>
+          </div>
+
+          <div class="step" data-step="4">
+            <span class="step-icon">4</span>
+            <span class="step-text">استخراج جدول الكميات</span>
+            <span class="step-status">⏳</span>
+          </div>
+
+          <div class="step" data-step="5">
+            <span class="step-icon">5</span>
+            <span class="step-text">الكتابة إلى جداول قوقل</span>
+            <span class="step-status">⏳</span>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <div id="progressMessage" class="progress-message">
+          جاري المعالجة...
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" class="section" style="display: none;">
+        <h3>✅ النتائج | Results</h3>
+
+        <div id="resultsContent" class="results-content">
+          <!-- Results will be inserted here -->
+        </div>
+
+        <div class="button-group">
+          <button id="viewSheetBtn" class="btn btn-primary" style="display: none;">
+            📊 عرض الجدول | View Sheet
+          </button>
+          <button id="extractAgainBtn" class="btn btn-secondary">
+            🔄 استخراج مرة أخرى | Extract Again
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Section -->
+      <div id="errorSection" class="section error-section" style="display: none;">
+        <h3>❌ خطأ | Error</h3>
+        <div id="errorMessage" class="error-message"></div>
+        <button id="retryBtn" class="btn btn-secondary">
+          🔄 إعادة المحاولة | Retry
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div id="actionSection" class="section">
+        <button id="extractBtn" class="btn btn-primary">
+          🚀 استخراج البيانات | Extract Data
+        </button>
+
+        <button id="authenticateBtn" class="btn btn-secondary" style="display: none;">
+          🔐 تسجيل الدخول لقوقل | Google Sign In
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <p class="footer-text">
+        <small>نسخة 1.0.0 | Version 1.0.0</small>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="helpModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3>كيفية الحصول على معرّف جدول البيانات</h3>
+      <p>How to get Spreadsheet ID:</p>
+      <ol>
+        <li>افتح جدول بيانات قوقل الخاص بك (Open your Google Sheet)</li>
+        <li>انسخ الرابط من شريط العنوان (Copy the URL from address bar)</li>
+        <li>المعرّف هو الجزء بين <code>/d/</code> و <code>/edit</code></li>
+        <li>مثال (Example):<br>
+          <code style="font-size: 10px; word-break: break-all;">
+            https://docs.google.com/spreadsheets/d/<strong>1a2b3c4d5e6f7g8h9i0j</strong>/edit
+          </code>
+        </li>
+      </ol>
+      <p>أو يمكنك إنشاء جدول جديد تلقائياً بترك الحقل فارغاً</p>
+      <p>Or you can create a new sheet automatically by leaving the field empty</p>
+      <button id="closeHelpBtn" class="btn btn-secondary">إغلاق | Close</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
